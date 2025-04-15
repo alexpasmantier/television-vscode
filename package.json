@@ -1,0 +1,65 @@
+{
+  "name": "television",
+  "publisher": "alexpasmantier",
+  "displayName": "television",
+  "author": {
+    "name": "Alex Pasmantier",
+    "url": "https://github.com/alexpasmantier/television-vscode"
+  },
+  "license": "MIT",
+  "description": "A cross-platform, fast and extensible general purpose fuzzy finder extension for VSCode.",
+  "version": "0.1.2",
+  "homepage": "https://github.com/alexpasmantier/television-vscode",
+  "icon": "tv-snow.JPG",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alexpasmantier/television-vscode.git"
+  },
+  "engines": {
+    "vscode": "^1.97.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "television.ToggleFileFinder",
+        "title": "Television: Toggle File Finder"
+      }
+    ],
+    "keybindings": [
+      {
+        "key": "cmd+p",
+        "command": "television.ToggleFileFinder"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src",
+    "test": "vscode-test",
+    "deploy": "vsce publish --yarn"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.97.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "20.x",
+    "@typescript-eslint/eslint-plugin": "^8.22.0",
+    "@typescript-eslint/parser": "^8.22.0",
+    "eslint": "^9.19.0",
+    "typescript": "^5.7.3",
+    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-electron": "^2.4.1"
+  },
+  "__metadata": {
+    "installedTimestamp": 1739127686092,
+    "size": 2237064
+  }
+}
+
