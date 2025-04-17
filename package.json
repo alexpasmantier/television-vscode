@@ -16,7 +16,7 @@
     "url": "https://github.com/alexpasmantier/television-vscode.git"
   },
   "engines": {
-    "vscode": "^1.96.0"
+    "vscode": "^1.97.0"
   },
   "categories": [
     "Other"
