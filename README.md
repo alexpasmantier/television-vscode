@@ -38,7 +38,7 @@ Installation instructions may be found [here](https://github.com/alexpasmantier/
 ## Default keybindings
 
 Television comes with the following keybindings:
-- <kbd>cmd+p</kbd>: toggle file finder
+- <kbd>ctrl+p</kbd>: toggle file finder
 
 These can be overridden by opening `Preferences: Open Keyboard Shortcuts`, and searching for `television`.
 
