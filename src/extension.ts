@@ -30,7 +30,9 @@ function launchTvTerminal(tv_command: string, cwd: vscode.Uri) {
     cwd: cwd,
   });
   log("Terminal created");
-  terminal.show();
+  terminal.show(); // This is supposed to also focus on the terminal, but occasionally fails
+  // Explicitly focus the editor group to mitigate focus race conditions
+  vscode.commands.executeCommand('workbench.action.focusActiveEditorGroup');
   return { terminal, tvFile: TV_TEMP_FILE };
 }
 
