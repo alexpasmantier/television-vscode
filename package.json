@@ -16,7 +16,7 @@
     "url": "https://github.com/alexpasmantier/television-vscode.git"
   },
   "engines": {
-    "vscode": "^1.97.0"
+    "vscode": "^1.96.0"
   },
   "categories": [
     "Other"
@@ -47,7 +47,7 @@
     "deploy": "vsce publish --yarn"
   },
   "devDependencies": {
-    "@types/vscode": "^1.97.0",
+    "@types/vscode": "^1.96.0",
     "@types/mocha": "^10.0.10",
     "@types/node": "20.x",
     "@typescript-eslint/eslint-plugin": "^8.22.0",
