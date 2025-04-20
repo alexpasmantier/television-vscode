@@ -1,15 +1,11 @@
 <div align="center">
 
 # 📺  [television-vscode](https://marketplace.visualstudio.com/items?itemName=alexpasmantier.television)
-**A fuzzy finder for VSCode based on [television](https://github.com/alexpasmantier/television).**. 
+**A fuzzy finder for VSCode based on [television](https://github.com/alexpasmantier/television)**
 
 
-![GitHub Release](https://img.shields.io/github/v/release/alexpasmantier/television?display_name=tag&color=%23a6a)
-![Crates.io Size](https://img.shields.io/crates/size/television)
-![docs.rs](https://img.shields.io/docsrs/television-channels)
 ![GitHub branch check runs](https://img.shields.io/github/check-runs/alexpasmantier/television/main)
 ![GitHub License](https://img.shields.io/github/license/alexpasmantier/television)
-![Crates.io Total Downloads](https://img.shields.io/crates/d/television)
 
 <img width="1463" alt="tv-vscode" src="https://github.com/user-attachments/assets/c03bf1d7-7cbe-47cc-9143-30a716e61af4" />
 </div>
