@@ -1,7 +1,7 @@
 <div align="center">
 
 # 📺  [television-vscode](https://marketplace.visualstudio.com/items?itemName=alexpasmantier.television)
-**A cross-platform vscode fuzzy finder extension for VSCode based on [television](https://github.com/alexpasmantier/television).**. 
+**A fuzzy finder for VSCode based on [television](https://github.com/alexpasmantier/television).**. 
 
 
 ![GitHub Release](https://img.shields.io/github/v/release/alexpasmantier/television?display_name=tag&color=%23a6a)
@@ -11,8 +11,7 @@
 ![GitHub License](https://img.shields.io/github/license/alexpasmantier/television)
 ![Crates.io Total Downloads](https://img.shields.io/crates/d/television)
 
-![tv on the curl codebase](https://github.com/user-attachments/assets/7d329ef3-4efe-4908-bbf8-e02744508eaf)
-
+<img width="1463" alt="tv-vscode" src="https://github.com/user-attachments/assets/c03bf1d7-7cbe-47cc-9143-30a716e61af4" />
 </div>
 
 ## About
@@ -27,9 +26,7 @@ It is inspired by the neovim [telescope](https://github.com/nvim-telescope/teles
 ## VSCode Extension
 [VSCode Marketplace](https://marketplace.visualstudio.com/items?itemName=alexpasmantier.television)
 
-This extension integrates `television` inside of `vscode` to effectively replace the default vscode file picker.
-
-![demo](https://github.com/alexpasmantier/television/raw/HEAD/tv-code-demo.gif)
+This extension integrates `tv` inside of `vscode` to provide a better file picker than the vscode default.
 
 ## Requirements
 
