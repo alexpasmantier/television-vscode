@@ -44,7 +44,3 @@ Television comes with the following keybindings:
 - <kbd>ctrl+p</kbd>: toggle file finder
 
 These can be overridden by opening `Preferences: Open Keyboard Shortcuts`, and searching for `television`.
-
-## Known Issues
-
-NA
