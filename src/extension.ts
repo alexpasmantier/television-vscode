@@ -3,13 +3,12 @@ import os from "os";
 import path from "path";
 import * as vscode from "vscode";
 
-
 function log(message: string, ...args: unknown[]) {
   const now = new Date().toISOString();
   console.log(`[TV] ${now} - ${message}`, ...args);
 }
 
-function maybe_close_terminal(terminal: vscode.Terminal | undefined) {
+function maybeCloseTerminal(terminal: vscode.Terminal | undefined) {
   if (terminal) {
     log("Found existing terminal, closing it");
     terminal.dispose();
@@ -32,7 +31,7 @@ function launchTvTerminal(tv_command: string, cwd: vscode.Uri) {
   log("Terminal created");
   terminal.show(); // This is supposed to also focus on the terminal, but occasionally fails
   // Explicitly focus the editor group to mitigate focus race conditions
-  vscode.commands.executeCommand('workbench.action.focusActiveEditorGroup');
+  vscode.commands.executeCommand("workbench.action.focusActiveEditorGroup");
   return { terminal, tvFile: TV_TEMP_FILE };
 }
 
@@ -61,6 +60,8 @@ async function openFiles(paths: string[], workspaceFolder: vscode.Uri) {
   );
 }
 
+const TELEVISION_FILES_COMMAND = "tv --no-remote files";
+
 async function toggleFileFinderHandler() {
   // Ensure workspace is open
   if (!vscode.workspace.workspaceFolders) {
@@ -72,14 +73,17 @@ async function toggleFileFinderHandler() {
   const workspaceFolder = vscode.workspace.workspaceFolders[0].uri;
   // Try to find an existing terminal with the name "TV Finder"
   if (
-    maybe_close_terminal(
+    maybeCloseTerminal(
       vscode.window.terminals.find((t) => t.name === "TV Finder"),
     )
   ) {
     return;
   }
   // launch TV in new terminal
-  const { terminal, tvFile } = launchTvTerminal("tv", workspaceFolder);
+  const { terminal, tvFile } = launchTvTerminal(
+    TELEVISION_FILES_COMMAND,
+    workspaceFolder,
+  );
   // Listen for terminal close, but only for this specific terminal
   const closeListener = vscode.window.onDidCloseTerminal(async (t) => {
     if (t === terminal) {
@@ -101,12 +105,23 @@ async function toggleFileFinderHandler() {
   });
 }
 
-export async function activate(context: { subscriptions: vscode.Disposable[]; }) {
+const MINIMUM_TV_VERSION = "0.11.8";
+
+export async function activate(context: {
+  subscriptions: vscode.Disposable[];
+}) {
   log("Activating Television");
-  // ensure tv is installed and available in PATH by checking version
+  // ensure tv is installed and available in PATH
   if (!(await checkBinaryAvailability())) {
-    warn_binary_not_found();
+    warnBinaryNotFound();
+    return;
   }
+  // ensure tv version is greater than MINIMUM_TV_VERSION
+  if (!(await checkBinaryVersion())) {
+    warnBinaryNeedsUpdate(MINIMUM_TV_VERSION);
+    return;
+  }
+
   log("Registering ToggleFileFinder command");
   let disposable = vscode.commands.registerCommand(
     "television.ToggleFileFinder",
@@ -132,7 +147,31 @@ function checkBinaryAvailability() {
   });
 }
 
-function warn_binary_not_found() {
+function checkBinaryVersion() {
+  return new Promise((resolve) => {
+    const command = "tv --version";
+    exec(command, (error, stdout) => {
+      if (error) {
+        console.error("Error checking Television version:", error);
+        resolve(false);
+        return;
+      }
+      const version = stdout.trim();
+      console.log(`Television version found: ${version}`);
+      console.log(`Minimum required version: ${MINIMUM_TV_VERSION}`);
+      if (compareVersions(version, MINIMUM_TV_VERSION) < 0) {
+        console.error(
+          `Television version ${version} is lower than minimum required version ${MINIMUM_TV_VERSION}.`,
+        );
+        resolve(false);
+        return;
+      }
+      resolve(true);
+    });
+  });
+}
+
+function warnBinaryNotFound() {
   vscode.window
     .showErrorMessage(
       "The television binary doesn't seem to be available. Try installing it by following the installation docs.",
@@ -147,4 +186,39 @@ function warn_binary_not_found() {
         );
       }
     });
+}
+
+function warnBinaryNeedsUpdate(min_version: string) {
+  vscode.window
+    .showErrorMessage(
+      "The television binary is outdated (minimum version is: " +
+        min_version +
+        "). Try updating it by following the installation docs.",
+      "Installation docs",
+    )
+    .then((selection) => {
+      if (selection === "Installation docs") {
+        vscode.env.openExternal(
+          vscode.Uri.parse(
+            "https://github.com/alexpasmantier/television/wiki/Installation",
+          ),
+        );
+      }
+    });
+}
+
+function compareVersions(version1: string, version2: string) {
+  const v1parts = version1.split(".").map(Number);
+  const v2parts = version2.split(".").map(Number);
+  for (let i = 0; i < Math.max(v1parts.length, v2parts.length); i++) {
+    const v1 = v1parts[i] || 0;
+    const v2 = v2parts[i] || 0;
+    if (v1 < v2) {
+      return -1;
+    }
+    if (v1 > v2) {
+      return 1;
+    }
+  }
+  return 0;
 }
