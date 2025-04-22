@@ -16,13 +16,25 @@ const TV_TEMP_FILE_NAME = "tv_selection";
 
 export function launchTvTerminal(tv_command: string, cwd: vscode.Uri) {
   const TV_TEMP_FILE = path.join(os.tmpdir(), TV_TEMP_FILE_NAME);
-  const terminal = vscode.window.createTerminal({
-    name: "TV Finder",
-    shellPath: "sh",
-    shellArgs: ["-c", tv_command + " | tee " + TV_TEMP_FILE],
-    location: vscode.TerminalLocation.Editor,
-    cwd: cwd,
-  });
+  let terminal: vscode.Terminal;
+  // for linux and macos
+  if (os.platform() === "linux" || os.platform() === "darwin") {
+    terminal = vscode.window.createTerminal({
+      name: "TV Finder",
+      shellPath: "sh",
+      shellArgs: ["-c", tv_command + " > " + TV_TEMP_FILE],
+      location: vscode.TerminalLocation.Editor,
+      cwd: cwd,
+    });
+  } else {
+    terminal = vscode.window.createTerminal({
+      name: "TV Finder",
+      shellPath: "cmd.exe",
+      shellArgs: ["/C", tv_command + " > " + TV_TEMP_FILE],
+      location: vscode.TerminalLocation.Editor,
+      cwd: cwd,
+    });
+  }
   info("Terminal created");
   terminal.show(); // This is supposed to also focus on the terminal, but occasionally fails
   // Explicitly focus the editor group to mitigate focus race conditions
