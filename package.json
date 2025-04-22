@@ -28,12 +28,20 @@
       {
         "command": "television.ToggleFileFinder",
         "title": "Television: Toggle File Finder"
+      },
+      {
+        "command": "television.ToggleTextFinder",
+        "title": "Television: Toggle Text Finder"
       }
     ],
     "keybindings": [
       {
         "key": "ctrl+p",
         "command": "television.ToggleFileFinder"
+      },
+      {
+        "key": "ctrl+shift+f",
+        "command": "television.ToggleTextFinder"
       }
     ]
   },

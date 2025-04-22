@@ -35,5 +35,6 @@ Installation instructions may be found [here](https://github.com/alexpasmantier/
 
 Television comes with the following keybindings:
 - <kbd>ctrl+p</kbd>: toggle file finder
+- <kbd>ctrl+shift+f</kbd>: toggle text finder (search in files, e.g. `grep`)
 
 These can be overridden by opening `Preferences: Open Keyboard Shortcuts`, and searching for `television`.
