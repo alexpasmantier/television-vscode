@@ -30,7 +30,7 @@ export async function genericHandler(
   // launch TV in new terminal
   const { terminal, tvFile } = launchTvTerminal(tv_command, workspaceFolder);
   // Listen for terminal close, but only for this specific terminal
-  const closeListener = vscode.window.onDidCloseTerminal(async (t) => {
+  const closeListener = vscode.window.onDidCloseTerminal(async (t: vscode.Terminal) => {
     if (t === terminal) {
       // Ensure it's our terminal
       info(`${name} terminal closed`);
@@ -44,6 +44,8 @@ export async function genericHandler(
           vscode.window.showErrorMessage(`Failed to open files: ${error}`);
         }
       }
+      // Refocus the editor group
+      vscode.commands.executeCommand('workbench.action.focusActiveEditorGroup');
       // Cleanup: Remove event listener after terminal is handled
       closeListener.dispose();
     }
