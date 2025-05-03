@@ -27,11 +27,18 @@
     "commands": [
       {
         "command": "television.ToggleFileFinder",
-        "title": "Television: Toggle File Finder"
+        "title": "Television: Toggle File Finder",
+        "category": "Television"
       },
       {
         "command": "television.ToggleTextFinder",
-        "title": "Television: Toggle Text Finder"
+        "title": "Television: Toggle Text Finder (grep)",
+        "category": "Television"
+      },
+      {
+        "command": "television.ToggleTextFinderWithSelection",
+        "title": "Television: Toggle Text Finder with Current Selection",
+        "category": "Television"
       }
     ],
     "keybindings": [
