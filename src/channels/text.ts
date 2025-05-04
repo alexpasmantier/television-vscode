@@ -5,10 +5,6 @@ import * as vscode from "vscode";
 const TELEVISION_COMMAND = "tv --no-remote text";
 
 export async function textHandler() {
-  genericHandler("TV Text", TELEVISION_COMMAND, openFilesAtLines);
-}
-
-export async function textHandlerWithSelection() {
   const editor = vscode.window.activeTextEditor;
   let command = TELEVISION_COMMAND;
 
@@ -21,8 +17,8 @@ export async function textHandlerWithSelection() {
         .replace(/\\/g, "\\\\") // Escape backslashes first
         .replace(/'/g, "\\'"); // Escape single quotes
 
-      // Append the input argument and the escaped value
-      command = `${TELEVISION_COMMAND} --input ${escapedQuery}`;
+      // Append the input argument and the escaped value, properly quoted
+      command = `${TELEVISION_COMMAND} --input '${escapedQuery}'`;
     }
   }
 
