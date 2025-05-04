@@ -17,8 +17,8 @@ export async function textHandler() {
         .replace(/\\/g, "\\\\") // Escape backslashes first
         .replace(/'/g, "\\'"); // Escape single quotes
 
-      // Append the input argument and the escaped value
-      command = `${TELEVISION_COMMAND} --input ${escapedQuery}`;
+      // Append the input argument and the escaped value, properly quoted
+      command = `${TELEVISION_COMMAND} --input '${escapedQuery}'`;
     }
   }
 
