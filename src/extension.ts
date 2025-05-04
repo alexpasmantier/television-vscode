@@ -8,7 +8,7 @@ import {
   warnBinaryNotFound,
 } from "./binary";
 import { filesHandler } from "./channels/files";
-import { textHandler, textHandlerWithSelection } from "./channels/text";
+import { textHandler } from "./channels/text";
 
 export async function activate(context: {
   subscriptions: vscode.Disposable[];
@@ -40,14 +40,6 @@ export async function activate(context: {
   disposable = vscode.commands.registerCommand(
     "television.ToggleTextFinder",
     textHandler,
-  );
-  context.subscriptions.push(disposable);
-  // Text with Selection
-  // -------------------------------------------------------------------------
-  info("Registering ToggleTextFinderWithSelection command");
-  disposable = vscode.commands.registerCommand(
-    "television.ToggleTextFinderWithSelection",
-    textHandlerWithSelection,
   );
   context.subscriptions.push(disposable);
 }

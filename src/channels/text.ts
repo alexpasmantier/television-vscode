@@ -5,10 +5,6 @@ import * as vscode from "vscode";
 const TELEVISION_COMMAND = "tv --no-remote text";
 
 export async function textHandler() {
-  genericHandler("TV Text", TELEVISION_COMMAND, openFilesAtLines);
-}
-
-export async function textHandlerWithSelection() {
   const editor = vscode.window.activeTextEditor;
   let command = TELEVISION_COMMAND;
 
