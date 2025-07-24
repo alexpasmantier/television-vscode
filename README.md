@@ -31,6 +31,19 @@ PATH.
 
 Installation instructions may be found [here](https://github.com/alexpasmantier/television/wiki/Installation).
 
+For example,installing on Homebrew can be done as follows:
+```bash
+brew install television
+```
+
+Once installed, run the command below, which will install the `files` and `text` channels that are required by the extension.
+
+```bash
+tv update-channels
+```
+
+See [television](https://github.com/alexpasmantier/television) for more details.
+
 ## Default keybindings
 
 Television comes with the following keybindings:
