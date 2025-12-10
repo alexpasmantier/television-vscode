@@ -42,6 +42,13 @@ export async function activate(context: {
     textHandler,
   );
   context.subscriptions.push(disposable);
+  
+  info("Registering ToggleTextFinderWithSelection command");
+  disposable = vscode.commands.registerCommand(
+    "television.ToggleTextFinderWithSelection",
+    textHandler,
+  );
+  context.subscriptions.push(disposable);
 }
 
 export function deactivate() {}
