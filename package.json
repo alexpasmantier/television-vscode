@@ -50,7 +50,18 @@
         "key": "ctrl+shift+f",
         "command": "television.ToggleTextFinder"
       }
-    ]
+    ],
+    "configuration": {
+      "title": "Television",
+      "properties": {
+        "television.defaultWorkspaceFolder": {
+          "type": "string",
+          "scope": "resource",
+          "description": "Default workspace folder name to use for searches when multiple workspace folders are defined. Must match the folder name exactly as shown in the workspace file (e.g., 'MyProject'). If not set or folder not found, a picker will be shown.",
+          "default": ""
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",

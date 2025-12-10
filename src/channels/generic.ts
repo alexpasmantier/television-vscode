@@ -21,29 +21,53 @@ export async function genericHandler(
     return;
   }
 
-  // Handle multi-folder workspaces by prompting user to select
+  // Handle multi-folder workspaces by checking setting or prompting user to select
   let workspaceFolder: vscode.Uri;
   if (vscode.workspace.workspaceFolders.length === 1) {
     workspaceFolder = vscode.workspace.workspaceFolders[0].uri;
   } else {
-    const items = vscode.workspace.workspaceFolders.map((folder) => ({
-      label: folder.name,
-      description: folder.uri.fsPath,
-      folder: folder,
-    }));
+    // Check for default workspace folder setting
+    const config = vscode.workspace.getConfiguration('television');
+    const defaultFolderName = config.get<string>('defaultWorkspaceFolder');
+    
+    if (defaultFolderName) {
+      // Try to find the configured folder by name
+      const defaultFolder = vscode.workspace.workspaceFolders.find(
+        (folder: vscode.WorkspaceFolder) => folder.name === defaultFolderName
+      );
+      
+      if (defaultFolder) {
+        workspaceFolder = defaultFolder.uri;
+        info(`Using configured default workspace folder: ${defaultFolderName}`);
+      } else {
+        // Show error if configured folder not found
+        const availableFolders = vscode.workspace.workspaceFolders.map((f: vscode.WorkspaceFolder) => f.name).join(', ');
+        vscode.window.showErrorMessage(
+          `Configured default workspace folder '${defaultFolderName}' not found. Available folders: ${availableFolders}`
+        );
+        return;
+      }
+    } else {
+      // Show picker to select workspace folder
+      const items = vscode.workspace.workspaceFolders.map((folder: vscode.WorkspaceFolder) => ({
+        label: folder.name,
+        description: folder.uri.fsPath,
+        folder: folder,
+      }));
 
-    const selected = await vscode.window.showQuickPick(items, {
-      placeHolder: "Select a workspace folder to search",
-    });
+      const selected = await vscode.window.showQuickPick(items, {
+        placeHolder: "Select a workspace folder to search",
+      });
 
-    if (!selected) {
-      return; // User cancelled
+      if (!selected) {
+        return; // User cancelled
+      }
+      workspaceFolder = selected.folder.uri;
     }
-    workspaceFolder = selected.folder.uri;
   }
   // Try to find an existing terminal with the same name
   if (
-    maybeCloseTerminal(vscode.window.terminals.find((t) => t.name === name))
+    maybeCloseTerminal(vscode.window.terminals.find((t: vscode.Terminal) => t.name === name))
   ) {
     return;
   }

@@ -1,8 +1,8 @@
 <div align="center">
 
-# 📺  [television-vscode](https://marketplace.visualstudio.com/items?itemName=alexpasmantier.television)
-**A fuzzy finder for VSCode based on [television](https://github.com/alexpasmantier/television)**
+# 📺 [television-vscode](https://marketplace.visualstudio.com/items?itemName=alexpasmantier.television)
 
+**A fuzzy finder for VSCode based on [television](https://github.com/alexpasmantier/television)**
 
 ![GitHub branch check runs](https://img.shields.io/github/check-runs/alexpasmantier/television/main)
 ![GitHub License](https://img.shields.io/github/license/alexpasmantier/television)
@@ -11,6 +11,7 @@
 </div>
 
 ## About
+
 `Television` is a cross-platform, fast and extensible fuzzy finder TUI.
 
 It lets you quickly search through any kind of data source (files, git repositories, environment variables, docker
@@ -18,13 +19,14 @@ images, you name it) using a fuzzy matching algorithm and is designed to be easi
 
 It is inspired by the neovim [telescope](https://github.com/nvim-telescope/telescope.nvim) plugin and leverages [tokio](https://github.com/tokio-rs/tokio) and the [nucleo](https://github.com/helix-editor/nucleo) matcher used by the [helix](https://github.com/helix-editor/helix) editor to ensure optimal performance.
 
-
 ## VSCode Extension
+
 [television on the VSCode Marketplace](https://marketplace.visualstudio.com/items?itemName=alexpasmantier.television)
 
 This extension integrates `tv` inside of `vscode` to provide a better file picker than the vscode default.
 
 ## Open VSX Registry
+
 [television on the Open VSX Registry](https://open-vsx.org/extension/alexpasmantier/television)
 
 ## Requirements
@@ -35,6 +37,7 @@ PATH.
 Installation instructions may be found [here](https://alexpasmantier.github.io/television/docs/Users/installation/).
 
 For example,installing on Homebrew can be done as follows:
+
 ```bash
 brew install television
 ```
@@ -47,9 +50,26 @@ tv update-channels
 
 See [television](https://github.com/alexpasmantier/television) for more details.
 
+## Configuration
+
+### Default Workspace Folder
+
+When working with multi-folder workspaces, you can set a default workspace folder to avoid the picker dialog:
+
+```json
+{
+  "television.defaultWorkspaceFolder": "folder"
+}
+```
+
+The value should match the workspace folder name exactly as it appears in your `.code-workspace` file or workspace explorer. If the configured folder is not found, an error message will be shown with available folder names.
+
+This setting can be configured at the workspace level in `.vscode/settings.json` to make it specific to each project.
+
 ## Default keybindings
 
 Television comes with the following keybindings:
+
 - <kbd>ctrl+p</kbd>: toggle file finder
 - <kbd>ctrl+shift+f</kbd>: toggle text finder (search in files, e.g. `grep`)
 
