@@ -20,7 +20,27 @@ export async function genericHandler(
     );
     return;
   }
-  const workspaceFolder = vscode.workspace.workspaceFolders[0].uri;
+
+  // Handle multi-folder workspaces by prompting user to select
+  let workspaceFolder: vscode.Uri;
+  if (vscode.workspace.workspaceFolders.length === 1) {
+    workspaceFolder = vscode.workspace.workspaceFolders[0].uri;
+  } else {
+    const items = vscode.workspace.workspaceFolders.map((folder) => ({
+      label: folder.name,
+      description: folder.uri.fsPath,
+      folder: folder,
+    }));
+
+    const selected = await vscode.window.showQuickPick(items, {
+      placeHolder: "Select a workspace folder to search",
+    });
+
+    if (!selected) {
+      return; // User cancelled
+    }
+    workspaceFolder = selected.folder.uri;
+  }
   // Try to find an existing terminal with the same name
   if (
     maybeCloseTerminal(vscode.window.terminals.find((t) => t.name === name))
