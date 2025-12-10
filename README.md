@@ -32,7 +32,7 @@ This extension integrates `tv` inside of `vscode` to provide a better file picke
 The extensions requires [television](https://github.com/alexpasmantier/television) to be installed and available on your
 PATH.
 
-Installation instructions may be found [here](https://github.com/alexpasmantier/television/wiki/Installation).
+Installation instructions may be found [here](https://alexpasmantier.github.io/television/docs/Users/installation/").
 
 For example,installing on Homebrew can be done as follows:
 ```bash

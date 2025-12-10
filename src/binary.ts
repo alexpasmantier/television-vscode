@@ -3,7 +3,8 @@ import os from "os";
 import * as vscode from "vscode";
 import { info, err, warn } from "./logging";
 
-export const MINIMUM_TV_VERSION = "0.11.8";
+export const MINIMUM_TV_VERSION = "0.13.0";
+export const INSTALLATION_DOCS_URL = "https://alexpasmantier.github.io/television/docs/Users/installation/";
 
 export function checkBinaryAvailability() {
   return new Promise((resolve) => {
@@ -54,7 +55,7 @@ export function warnBinaryNotFound() {
       if (selection === "Installation docs") {
         vscode.env.openExternal(
           vscode.Uri.parse(
-            "https://github.com/alexpasmantier/television/wiki/Installation",
+            INSTALLATION_DOCS_URL,
           ),
         );
       }
@@ -65,15 +66,15 @@ export function warnBinaryNeedsUpdate(min_version: string) {
   vscode.window
     .showErrorMessage(
       "The television binary is outdated (minimum version is: " +
-        min_version +
-        "). Try updating it by following the installation docs.",
+      min_version +
+      "). Try updating it by following the installation docs.",
       "Installation docs",
     )
     .then((selection) => {
       if (selection === "Installation docs") {
         vscode.env.openExternal(
           vscode.Uri.parse(
-            "https://github.com/alexpasmantier/television/wiki/Installation",
+            INSTALLATION_DOCS_URL,
           ),
         );
       }
