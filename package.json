@@ -8,7 +8,7 @@
   },
   "license": "MIT",
   "description": "A cross-platform, fast and extensible general purpose fuzzy finder extension for VSCode.",
-  "version": "0.4.1",
+  "version": "0.4.3",
   "homepage": "https://github.com/alexpasmantier/television-vscode",
   "icon": "tv-snow.JPG",
   "repository": {

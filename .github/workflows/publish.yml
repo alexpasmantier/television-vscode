@@ -2,9 +2,17 @@ on:
   push:
     tags:
       - "*"
-
+permissions:
+  contents: write
 name: Deploy Extension
 jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Release
+        uses: softprops/action-gh-release@v2
   deploy:
     runs-on: ubuntu-latest
     steps:
