@@ -20,9 +20,12 @@ It is inspired by the neovim [telescope](https://github.com/nvim-telescope/teles
 
 
 ## VSCode Extension
-[VSCode Marketplace](https://marketplace.visualstudio.com/items?itemName=alexpasmantier.television)
+[television on the VSCode Marketplace](https://marketplace.visualstudio.com/items?itemName=alexpasmantier.television)
 
 This extension integrates `tv` inside of `vscode` to provide a better file picker than the vscode default.
+
+## Open VSX Registry
+[television on the Open VSX Registry](https://open-vsx.org/extension/alexpasmantier/television)
 
 ## Requirements
 
